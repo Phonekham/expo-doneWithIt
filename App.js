@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
 import Screen from "./app/components/Screen";
-import { Text } from "react-native";
+import { Text, Button } from "react-native";
 
 const Stack = createStackNavigator();
 const StackNavigator = () => (
@@ -13,9 +13,13 @@ const StackNavigator = () => (
   </Stack.Navigator>
 );
 
-const Tweets = () => (
+const Tweets = ({ navigation }) => (
   <Screen>
     <Text>Tweets</Text>
+    <Button
+      title="View Tweet"
+      onPress={() => navigation.push("TweetsDetails")}
+    ></Button>
   </Screen>
 );
 const TweetDetails = () => (
