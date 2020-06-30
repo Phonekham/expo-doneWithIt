@@ -18,13 +18,13 @@ const Tweets = ({ navigation }) => (
     <Text>Tweets</Text>
     <Button
       title="View Tweet"
-      onPress={() => navigation.push("TweetsDetails")}
+      onPress={() => navigation.navigate("TweetsDetails", { id: 1 })}
     ></Button>
   </Screen>
 );
-const TweetDetails = () => (
+const TweetDetails = ({ route }) => (
   <Screen>
-    <Text>Tweets details</Text>
+    <Text>Tweets details {route.params.id}</Text>
   </Screen>
 );
 
