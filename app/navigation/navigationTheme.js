@@ -1,3 +1,4 @@
+import React from "react";
 import { DefaultTheme } from "@react-navigation/native";
 import colors from "../config/colors";
 

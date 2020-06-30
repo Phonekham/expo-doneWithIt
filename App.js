@@ -8,6 +8,7 @@ import Screen from "./app/components/Screen";
 import { Text, Button } from "react-native";
 import AuthNavigator from "./app/navigation/AuthNavigator";
 import navigationTheme from "./app/navigation/navigationTheme";
+import AppNavigator from "./app/navigation/AppNavigator";
 
 const Stack = createStackNavigator();
 const StackNavigator = () => (
@@ -74,7 +75,7 @@ const TabNavigator = () => (
 export default function App() {
   return (
     <NavigationContainer theme={navigationTheme}>
-      <AuthNavigator></AuthNavigator>
+      <AppNavigator></AppNavigator>
     </NavigationContainer>
   );
 }
