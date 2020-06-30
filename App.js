@@ -9,7 +9,11 @@ const Stack = createStackNavigator();
 const StackNavigator = () => (
   <Stack.Navigator>
     <Stack.Screen name="Tweets" component={Tweets}></Stack.Screen>
-    <Stack.Screen name="TweetsDetails" component={TweetDetails}></Stack.Screen>
+    <Stack.Screen
+      name="TweetsDetails"
+      component={TweetDetails}
+      options={({ route }) => ({ title: route.params.id })}
+    ></Stack.Screen>
   </Stack.Navigator>
 );
 
