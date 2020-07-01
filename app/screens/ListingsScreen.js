@@ -9,37 +9,26 @@ import routes from "../navigation/routes";
 import Button from "../components/Button";
 import AppText from "../components/Text";
 import ActivityIndicator from "../components/ActivityIndicator";
+import useApi from "../hooks/useApi";
 
 function ListingsScreen({ navigation }) {
-  const [listings, setListings] = useState([]);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const getListingsApi = useApi(listingApi.getListings);
 
   useEffect(() => {
-    loadListings();
+    getListingsApi.request();
   }, []);
-
-  const loadListings = async () => {
-    setLoading(true);
-    const response = await listingApi.getListings();
-    if (!response.ok) return setError(true);
-    setLoading(false);
-
-    setError(false);
-    setListings(response.data);
-  };
 
   return (
     <Screen style={styles.screen}>
-      {error && (
+      {getListingsApi.error && (
         <>
           <AppText>Couldn't retrieve th listings</AppText>
           <Button title="retry" onPress={loadListings}></Button>
         </>
       )}
-      <ActivityIndicator visible={true} />
-      {/* <FlatList
-        data={listings}
+      <ActivityIndicator visible={getListingsApi.loading} />
+      <FlatList
+        data={getListingsApi.data}
         keyExtractor={(listing) => listing.id.toString()}
         renderItem={({ item }) => (
           <Card
@@ -49,7 +38,7 @@ function ListingsScreen({ navigation }) {
             onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
           />
         )}
-      /> */}
+      />
     </Screen>
   );
 }
