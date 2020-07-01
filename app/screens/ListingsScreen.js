@@ -8,18 +8,22 @@ import Screen from "../components/Screen";
 import routes from "../navigation/routes";
 import Button from "../components/Button";
 import AppText from "../components/Text";
+import ActivityIndicator from "../components/ActivityIndicator";
 
 function ListingsScreen({ navigation }) {
   const [listings, setListings] = useState([]);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     loadListings();
   }, []);
 
   const loadListings = async () => {
+    setLoading(true);
     const response = await listingApi.getListings();
     if (!response.ok) return setError(true);
+    setLoading(false);
 
     setError(false);
     setListings(response.data);
@@ -33,7 +37,8 @@ function ListingsScreen({ navigation }) {
           <Button title="retry" onPress={loadListings}></Button>
         </>
       )}
-      <FlatList
+      <ActivityIndicator visible={true} />
+      {/* <FlatList
         data={listings}
         keyExtractor={(listing) => listing.id.toString()}
         renderItem={({ item }) => (
@@ -44,7 +49,7 @@ function ListingsScreen({ navigation }) {
             onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
           />
         )}
-      />
+      /> */}
     </Screen>
   );
 }
