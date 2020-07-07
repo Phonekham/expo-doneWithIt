@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import jwtDecode from "jwt-decode";
 
 import Screen from "../components/Screen";
+import authStorage from "../auth/storage";
 import {
   ErrorMessage,
   Form,
@@ -28,6 +29,7 @@ function LoginScreen(props) {
     setLoginFail(false);
     const user = jwtDecode(result.data);
     authContext.setUser(user);
+    authStorage.storeToken(result.data);
   };
 
   return (
