@@ -25,6 +25,10 @@ export default function App() {
       ></AppLoading>
     );
 
+  // const navigationRef = React.createRef();
+  // const navigation = navigationRef.current;
+  // navigation.navigate();
+
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <OfflineNotice></OfflineNotice>

@@ -9,11 +9,16 @@ import FeedNavigator from "./FeedNavigator";
 import AccountNavigator from "./AccountNavigator";
 import NewListingButton from "./NewListingButton";
 import routes from "./routes";
+import expoPushTokensApi from "../api/expoPushTokens";
+import navigation from "./rootNavigation";
 
 const Tab = createBottomTabNavigator();
 const AppNavigator = () => {
   useEffect(() => {
     registerForPushNotifications();
+    Notifications.addListener((notification) => {
+      navigation.navigate("Account");
+    });
   }, []);
 
   const registerForPushNotifications = async () => {
@@ -21,7 +26,7 @@ const AppNavigator = () => {
       const permission = await Permissions.askAsync(Permissions.NOTIFICATIONS);
       if (!permission.granted) return;
       const token = await Notifications.getExpoPushTokenAsync();
-      console.log(token);
+      expoPushTokensApi.register(token);
     } catch (error) {
       console.log(error);
     }
