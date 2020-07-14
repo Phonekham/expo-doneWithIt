@@ -3,10 +3,10 @@ import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
 import expoPushTokensApi from "../api/expoPushTokens";
 
-export default useNotifications = (nitificationListener) => {
+export default useNotifications = (notificationListener) => {
   useEffect(() => {
     registerForPushNotifications();
-    if (nitificationListener) Notifications.addListener(nitificationListener);
+    if (notificationListener) Notifications.addListener(notificationListener);
   }, []);
 
   const registerForPushNotifications = async () => {
